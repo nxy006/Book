@@ -5,8 +5,6 @@
 
 ## 12.1 数值类的构成
 
-
-
 程序中用到的整数一般都是 Fixnum 类能够处理的范围内的整数。如果使用的整数超过了 Fixnum 的范围，Ruby 就会自动将其转换为 Bignum 类。因此，在写程序时，我们几乎可以忽略上述整数类的区别。
 
 Ruby 也可以处理有理数和复数。有理数用 Rational 类表示，复数用 Complex 类表示。
@@ -32,6 +30,7 @@ p [c.real, c.imaginary]   #=> [-3, 4]
 
 ## 12.2 数值的字面量
 下表是表示数值对象的字面量的例子。
+
 | 字面量 | 作用（括号内为10进制的值） |
 | -- | -- |
 | 123 | 表示十进制整数 |
@@ -69,6 +68,7 @@ p 1.234e-4   #=> 0.0001234
 ## 12.3 算数计算
 
 下表列出了数值对象间进行基本的算术运算时用到的运算符：
+
 | 运算符 | 运算 |
 | -- | -- |
 | + | 加法运算 |
@@ -230,6 +230,7 @@ b = 3 / 10r
 p [a, b]   #=> [(3/10), (3/10)]
 p a == b   #=> true
 ```
+
 ### Comparable 模块
 Ruby 的比较运算符（ = = 、 <= 等）实际上都是方法。 Comparable 模块中封装了比较运算符，将其Mix-in 到类后，就可以实现对实例进行比较的方法（下表）。Comparable 在英语中就是“可以比较”的意思。
 
@@ -238,18 +239,19 @@ Comparable模块封装了<，<=，==，>=，>，between? 方法
 下面的 Vector 类表示拥有 x 和 y 两个坐标的向量。为了比较向量间的坐标，这里定义了 <=> 运算符。然后，通过包含（include） Comparable 模块，就可以实现上表中的比较方法。
 ```ruby
 class Vector
-include Comparable
-attr_accessor :x, :y
-def initialize(x, y)
-@x, @y = x, y
+  include Comparable
+  attr_accessor :x, :y
+  def initialize(x, y)
+    @x, @y = x, y
+  end
+  def scalar
+    Math.sqrt(x ** 2 + y ** 2)
+  end
+  def <=> (other)
+    scalar <=> other.scalar
+  end
 end
-def scalar
-Math.sqrt(x ** 2 + y ** 2)
-end
-def <=> (other)
-scalar <=> other.scalar
-end
-end
+
 v1 = Vector.new(2, 6)
 v2 = Vector.new(4, -4)
 p v1 <=> v2 #=> 1

@@ -4,16 +4,19 @@
 [TOC]
 
 ## 18.1 File 类
+
 ### 18.1.1 变更文件名
 - `File.rename(before, after)`
   我们可以用 File.rename 方法变更文件名。
   ```ruby
   File.rename("before.txt", "after.txt")
   ```
+
   还可以将文件移动到已存在的目录下，目录不存在则程序会产生错误。
   ```ruby
   File.rename("data.txt", "backup/data.txt")
   ```
+
   注：File.rename 方法无法跨文件系统或者驱动器移动文件。
   如果文件不存在，或者没有适当的文件操作权限等，则文件操作失败，程序抛出异常。
 
@@ -29,13 +32,14 @@
     end
   end
   ```
-  不过，由于文件复制是常用的操作，如果每次使用时都需要自己重新定义一次的话就非常麻烦。因此，我们可以通过引用 fileutils 库，使用其中的 FileUtils.cp （文件复制），FileUtils.mv（ 文件移动）等方法来操作文件。
 
+  不过，由于文件复制是常用的操作，如果每次使用时都需要自己重新定义一次的话就非常麻烦。因此，我们可以通过引用 fileutils 库，使用其中的 FileUtils.cp （文件复制），FileUtils.mv（ 文件移动）等方法来操作文件。
   ```ruby
   require "fileutils"
   FileUtils.cp("data.txt", "backup/data.txt")
   FileUtils.mv("data.txt", "backup/data.txt")
   ```
+
   File.rename 不能实现的跨文件系统、驱动器的文件移动，用 FileUtils.mv 方法则可以轻松实现。关于 fileutils 库，我们在后续章节中会详细介绍。
 
 ### 18.1.3 删除文件
@@ -173,21 +177,22 @@ io.close
 - `File.stat(path)`
   使用 File.stat 方法可以获取文件、目录的属性。 File.stat 方法返回的是 File::Stat 类的实例。 File::Stat 类的实例方法如表所示。
 
-    | 方法 | 返回值的含义 |
-    | -- | -- |
-    | dev | 文件系统的编号 |
-    | ino i-node | 编号 |
-    | mode | 文件的属性 |
-    | nlink | 链接数 |
-    | uid | 文件所有者的用户ID |
-    | gid | 文件所属组的组ID |
-    | rdev | 文件系统的驱动器种类 |
-    | size | 文件大小 |
-    | blksize | 文件系统的块大小 |
-    | blocks | 文件占用的块数量 |
-    | atime | 文件的最后访问时间 |
-    | mtime | 文件的最后修改时间 |
-    | ctime | 文件状态的最后更改时间 |
+  | 方法 | 返回值的含义 |
+  | -- | -- |
+  | dev | 文件系统的编号 |
+  | ino i-node | 编号 |
+  | mode | 文件的属性 |
+  | nlink | 链接数 |
+  | uid | 文件所有者的用户ID |
+  | gid | 文件所属组的组ID |
+  | rdev | 文件系统的驱动器种类 |
+  | size | 文件大小 |
+  | blksize | 文件系统的块大小 |
+  | blocks | 文件占用的块数量 |
+  | atime | 文件的最后访问时间 |
+  | mtime | 文件的最后修改时间 |
+  | ctime | 文件状态的最后更改时间 |
+  
   其中，除了 atime 方法、mtime 方法、ctime 方法返回 T ime 对象外，其他方法都返回整数值。
   通过 uid 方法与 gid 方法获取对应的用户ID 与组ID 时，需要用到 Etc 模块。我们可以通过 require 'etc' 来引用 Etc 模块。
   Unix 的密码文件（/etc/passwd）包含用户ID、用户名、组ID、主目录等信息，Etc.getpwuid方法可以返回对应用户ID 的密码文件内容。同样地，组文件（/etc/group）包含组ID、组名等信息，Etc.getgrgid 方法可以返回对应组ID 的组文件内容。
@@ -223,6 +228,7 @@ io.close
 
 **FileTest 模块**
 FileTest 模块中的方法用于检查文件的属性（表18.2）。该模块可以在include 后使用，也可以直接作为模块函数使用。其中的方法也可以作为 File 类的类方法使用。
+
 | 方法 | 返回值 |
 | -- | -- |
 | exist?( path) | path 若存在则返回 true |

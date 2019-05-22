@@ -3,7 +3,6 @@
 
 [TOC]
 
-
 ## 23.1 获取邮政编码
 日本的邮政编码可在官方网站上下载：http://www.post.japanpost.jp/zipcode/dl/kogaki-zip.html，点击“都道府県一覧”栏中最后的“全国一括”下载zip 文件，用zip 工具解压后就可以得到格式为CSV、编码为Shift_JIS 的全日本的邮政编码文件K EN_ALL.CSV。
 
@@ -47,6 +46,7 @@ CSV.open("KEN_ALL.CSV", "r:Shift_JIS:UTF-8") do |csv|
 end
 p Time.now - start_time # 输出结束时间与开始时间之差
 ```
+
 ```
 > rubyread_csv.rb 1000002
 13101 100 1000002 ﾄｳｷｮｳﾄﾁﾖﾀﾞｸｺｳｷｮｶﾞｲｴﾝ 東京都 千代田区 皇居外苑0 0 0 0 0 0 6.655200747
@@ -115,6 +115,7 @@ end
 ## 23.4 插入数据
 下面我们来编写一个查询邮政编码的程序。程序的功能通过封装为 JZipCode 类的方法来实现。
 首先需要设计邮政编码表的构成。这里，我们简单地设计为下面这样的表。
+
 | - | 邮政编码 | 都道府县名 | 市区町村名 | 町域名 | 用于检索的住址 |
 | -- | -- | -- | -- | -- | -- |
 | 字段名 | code | pref | city | address | alladdress |
